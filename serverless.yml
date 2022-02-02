@@ -8,11 +8,20 @@ provider:
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-dynamodb-local
   - serverless-offline
 
 custom:
   serverless-offline:
     host: 0.0.0.0
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      convertEmptyValues: true
 
 functions:
   test:
@@ -21,3 +30,19 @@ functions:
       - httpApi:
           method: get
           path: /test
+
+resources:
+  Resources:
+    DemoTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        TableName: 'DemoTable'
+        KeySchema:
+          - AttributeName: 'id'
+            KeyType: 'HASH'
+        AttributeDefinitions:
+          - AttributeName: 'id'
+            AttributeType: 'S'
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

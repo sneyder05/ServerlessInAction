@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  app:
+    image: sless/app
+    restart: on-failure
+    build: .
+    ports:
+      - 3000:3000
+    logging:
+      options:
+        max-size: "1024k"
+        max-file: 10

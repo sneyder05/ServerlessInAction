@@ -1,0 +1,26 @@
+{
+  "name": "my-serverless",
+  "version": "1.0.0",
+  "description": "Serverless in action",
+  "scripts": {
+    "start": "sls offline start",
+    "build": "npm run clean && tsc",
+    "clean": "rimraf dist .build .serverless coverage",
+    "lint": "eslint ./app"
+  },
+  "keywords": [
+    "serverless"
+  ],
+  "author": "Sneyder Navia",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.92",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "aws-lambda": "^1.0.7",
+    "eslint": "^8.8.0",
+    "serverless-offline": "^8.4.0",
+    "serverless-plugin-typescript": "^2.1.1",
+    "typescript": "^4.5.5"
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "M10001",
+    "name": "Math I",
+    "hours": "18"
+  },
+  {
+    "id": "M10002",
+    "name": "Math II",
+    "hours": "22"
+  },
+  {
+    "id": "E20001",
+    "name": "English I",
+    "hours": "12"
+  },
+  {
+    "id": "E20002",
+    "name": "English II",
+    "hours": "16"
+  }
+]

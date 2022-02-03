@@ -5,6 +5,12 @@ provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: '20201221'
+  environment:
+    NODE_ENV: dev
+    DYNAMO_STUDENT_TABLE: student-${sls:stage}
+    DYNAMO_SUBJECT_TABLE: subject-${sls:stage}
+    DYNAMO_STUDENT_SEMESTER: student-semester-${sls:stage}
+  stage: dev
 
 plugins:
   - serverless-plugin-typescript
@@ -14,6 +20,7 @@ plugins:
 custom:
   serverless-offline:
     host: 0.0.0.0
+    httpPort: 3400
   dynamodb:
     stages:
       - dev
@@ -22,6 +29,16 @@ custom:
       inMemory: true
       migrate: true
       convertEmptyValues: true
+      seed: true
+    seed:
+      domain:
+        sources:
+          - table: ${self:provider.environment.DYNAMO_STUDENT_TABLE}
+            sources: [./dynamo/seeds/students.seed.json]
+          - table: ${self:provider.environment.DYNAMO_SUBJECT_TABLE}
+            sources: [./dynamo/seeds/subjects.seeds.json]
+          - table: ${self:provider.environment.DYNAMO_STUDENT_SEMESTER}
+            sources: [./dynamo/seeds/students-semesters.seed.json]
 
 functions:
   test:
@@ -33,15 +50,41 @@ functions:
 
 resources:
   Resources:
-    DemoTable:
+    StudentTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:
-        TableName: 'DemoTable'
+        TableName: ${self:provider.environment.DYNAMO_STUDENT_TABLE}
         KeySchema:
           - AttributeName: 'id'
             KeyType: 'HASH'
         AttributeDefinitions:
           - AttributeName: 'id'
+            AttributeType: 'S'
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    SubjectTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        TableName: ${self:provider.environment.DYNAMO_SUBJECT_TABLE}
+        KeySchema:
+          - AttributeName: 'id'
+            KeyType: 'HASH'
+        AttributeDefinitions:
+          - AttributeName: 'id'
+            AttributeType: 'S'
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    StudentSemesterTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        TableName: ${self:provider.environment.DYNAMO_STUDENT_SEMESTER}
+        KeySchema:
+          - AttributeName: 'id'
+            KeyType: 'HASH'
+        AttributeDefinitions:
+          - AttributeName: id
             AttributeType: 'S'
         ProvisionedThroughput:
           ReadCapacityUnits: 1

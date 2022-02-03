@@ -3,11 +3,14 @@ import { AWSUtils, } from './utils'
 export const test = async () => {
   try {
     const db = AWSUtils.getDynamoDb()
-    console.log('🧨🧨  ~ file: handler.ts ~ line 6 ~ test ~ db', db)
 
     const record = await db.get({
-      TableName: 'DemoTable',
-      Key: { id: '123', },
+      TableName: process.env.DYNAMO_STUDENT_TABLE,
+      Key: { id: '100100100', },
+    }).promise()
+
+    const all = await db.scan({
+      TableName: process.env.DYNAMO_STUDENT_TABLE,
     }).promise()
 
     return {
@@ -16,6 +19,7 @@ export const test = async () => {
         {
           message: 'It works',
           record,
+          all,
         }
       ),
     }

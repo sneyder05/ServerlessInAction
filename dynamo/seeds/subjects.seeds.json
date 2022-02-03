@@ -1,21 +1,21 @@
 [
   {
-    "id": "M10001",
+    "id": "3891cca2-95de-4695-94b7-47b9d67ab266",
     "name": "Math I",
     "hours": "18"
   },
   {
-    "id": "M10002",
+    "id": "9f5fb30f-4b6d-46de-8801-2ca14184dc1d",
     "name": "Math II",
     "hours": "22"
   },
   {
-    "id": "E20001",
+    "id": "3862227c-1708-4a82-bcd3-d3b00feffa42",
     "name": "English I",
     "hours": "12"
   },
   {
-    "id": "E20002",
+    "id": "a5f64db8-80f5-4cb8-be40-cbe5d973d6d2",
     "name": "English II",
     "hours": "16"
   }

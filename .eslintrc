@@ -16,6 +16,7 @@
     "semi": ["error", "never"],
     "quotes": [2, "single"],
     "comma-dangle": ["error", "always"],
+    "no-console": "warn",
     "no-lonely-if": "error",
     "no-mixed-spaces-and-tabs": "error",
     "no-trailing-spaces": "error",

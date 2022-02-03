@@ -47,6 +47,18 @@ functions:
       - httpApi:
           method: get
           path: /test
+  getStudent:
+    handler: app/handlers/student.get
+    events:
+      - httpApi:
+          method: get
+          path: /student/{id}
+  addStudent:
+    handler: app/handlers/student.add
+    events:
+      - httpApi:
+          method: post
+          path: /student
 
 resources:
   Resources:
